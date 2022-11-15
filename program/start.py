@@ -14,8 +14,6 @@ from config import (
     OWNER_NAME,
     SUDO_USERS,
     BOT_TOKEN,
-    DEV_PHOTO,
-    DEV_NAME,
     UPDATES_CHANNEL,
 )
 from program import __version__
@@ -99,58 +97,6 @@ async def start_(client: Client, message: Message):
         ),
     )
 
-
-@Client.on_message(command(["برمج السورس", f"ؤمن", f"ورس", f"لسورس", f"ادو", f"اضو"]) & filters.group & ~filters.edited)
-async def start(client: Client, message: Message):
-    await message.reply_photo(
-        photo=f"https://telegra.ph/file/18b88af791e36bf3c4259.jpg",
-        caption=f"""ᴘʀᴏɢʀᴀᴍᴍᴇʀ [ѕʜᴀᴅᴏᴡ](https://t.me/S_V_I_P) 𖡼\nᴛᴏ ᴄᴏᴍᴍụɴɪᴄᴀᴛᴇ ᴛᴏɢᴇᴛʜᴇʀ 𖡼\nғᴏʟʟᴏᴡ ᴛʜᴇ ʙụᴛᴛᴏɴѕ ʟᴏᴡᴇʀ 𖡼""",
-        reply_markup=InlineKeyboardMarkup(
-         [
-            [
-                InlineKeyboardButton("𓌹●↯‌𝑫𝑨𝑫 𝑺𝑯𝑨𝑫𝑶𝑾↯●𓌺", url=f"https://t.me/KB_Shadow"),
-            ],
-            [
-                InlineKeyboardButton(
-                    "𝑬𝑹𝑹𝑶𝑹🖤", url=f"https://t.me/FA9SH"
-                ),
-            ],
-            [
-                InlineKeyboardButton("♡اضف البوت الى مجموعتك♡", url=f"https://t.me/USDDBOT?startgroup=true"),
-            ]
-         ]
-     )
-  )
-
-@Client.on_message(command(["لمطور", "طور"]) & filters.group & ~filters.edited)
-async def help(client: Client, message: Message):
-    await message.reply_photo(
-        photo=f"{DEV_PHOTO}",
-        caption=f"""◍ الاول: هو مطور السورس \n◍ الثاني: هو مطور البوت\n√""",
-        reply_markup=InlineKeyboardMarkup(
-         [
-            [
-                InlineKeyboardButton("𓌹●↯‌𝑫𝑨𝑫 𝑺𝑯𝑨𝑫𝑶𝑾↯●𓌺", url=f"https://t.me/S_V_I_P"),
-            ],
-            [
-                InlineKeyboardButton(
-                        DEV_NAME, url=f"https://t.me/{OWNER_NAME}"
-                ),
-            ],
-            [
-                InlineKeyboardButton("ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"),
-            ]
-         ]
-     )
-  )
-
-@Client.on_message(command(["لب التوكن", f"لب_التوكن", "hadow"]) & filters.private & ~filters.edited)
-@sudo_users_only
-async def shadow(c: Client, message: Message):
-    start = time()
-    m_reply = await message.reply_text("انتظر من فضلك...")
-    BOT_TOKEN = time() - start
-    await m_reply.edit_text(f"**تم جلب التوكن**\n`{BOT_TOKEN}`")
 
 @Client.on_message(command(["ping", f"بينج"]) & ~filters.edited)
 async def ping_pong(client: Client, message: Message):
