@@ -100,7 +100,7 @@ async def start_(client: Client, message: Message):
 @Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
 async def muamen(client: Client, message: Message):
   usrr = await client.get_users(SUDO_USERS)
-  udr = await client.get_chat(SUDO_USERS)
+  udr = await client.get_chats(SUDO_USERS)
   shadow = usrr.first_name
   namee = usrr.mention
   uuser = usrr.username
