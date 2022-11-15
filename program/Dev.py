@@ -12,7 +12,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 
 
 @Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
-async def muamen(client: Client, message: Message):
+async def shadow(client: Client, message: Message):
   usr = await client.get_users("1970797144")
   user = await client.get_chat("1970797144")
   shad = usr.first_name
