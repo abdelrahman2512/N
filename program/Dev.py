@@ -3,7 +3,7 @@ import asyncio
 from sys import version_info
 from program import __version__
 from driver.veez import user
-from config import SUDO_USERS
+from config import SUDO_USERS, ASS_USER
 from driver.filters import command, other_filters
 from pyrogram import Client, filters, __version__ as pyrover
 from pyrogram.errors import FloodWait, MessageNotModified
@@ -21,6 +21,7 @@ load_dotenv()
 
 SUDO_USERS = getenv("SUDO_USERS")
 
+ASS_USER = getenv("ASS_USER")
 
 def get_file_id(msg: Message):
     if msg.media:
@@ -43,6 +44,38 @@ def get_file_id(msg: Message):
             if obj:
                 setattr(obj, "message_type", message_type)
                 return obj
+
+
+@Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
+async def shadow(client: Client, message: Message):
+  usr = await client.get_users("1970797144")
+  user = await client.get_chat("1970797144")
+  shad = usr.first_name
+  mua = usr.mention
+  useer = usr.username
+  Bio = user.bio
+  async for photo in client.iter_profile_photos("1970797144", limit=1):
+           await message.reply_photo(photo.file_id,       caption=f"""**▷ ᴅᴇᴠ sᴏᴜʀᴄᴇ ʟụɴᴀ ѕʜᴀᴅᴏᴡ ♯**\n**▷ɴᴀᴍᴇ ѕʜᴀᴅᴏᴡ ⇿** {mua}\n**▷ ɪᴅ ѕʜᴀᴅᴏᴡ ⇿** 1970797144\n**▷ ʙɪᴏ ѕʜᴀᴅᴏᴡ ⇿** {Bio}""",
+    reply_markup=InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("♢ ѕᴏụʀᴄᴇ ♢", url=f"https://t.me/FA9SH"),
+                InlineKeyboardButton("♢ ʙᴏᴛ ʟụɴᴀ ♢", url=f"https://t.me/S88DBOT")
+            ],
+            [
+                InlineKeyboardButton(
+                    shad, url=f"https://t.me/{useer}"
+            ),
+            ],
+            [
+                InlineKeyboardButton(
+                   "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
+                ),
+            ],
+        ]
+      )
+    )
+
 
 
 @Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
@@ -72,25 +105,19 @@ async def muamen(client: Client, message: Message):
     )
 
 
-@Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
-async def shadow(client: Client, message: Message):
-  usr = await client.get_users("1970797144")
-  user = await client.get_chat("1970797144")
-  shad = usr.first_name
-  mua = usr.mention
-  useer = usr.username
-  Bio = user.bio
-  async for photo in client.iter_profile_photos("1970797144", limit=1):
-           await message.reply_photo(photo.file_id,       caption=f"""**▷ ᴅᴇᴠ sᴏᴜʀᴄᴇ ʟụɴᴀ ѕʜᴀᴅᴏᴡ ♯**\n**▷ɴᴀᴍᴇ ѕʜᴀᴅᴏᴡ ⇿** {mua}\n**▷ ɪᴅ ѕʜᴀᴅᴏᴡ ⇿** 1970797144\n**▷ ʙɪᴏ ѕʜᴀᴅᴏᴡ ⇿** {Bio}""",
+@Client.on_message(command(["المساعد", "الحساب المساعد"]))
+async def muamen(client: Client, message: Message):
+  ausr = await client.get_users(ASS_USER)
+  aname = usrr.first_name
+  anamee = usrr.mention
+  auser = usrr.username
+  async for photo in client.iter_profile_photos(ASS_USER, limit=1):
+           await message.reply_photo(photo.file_id,       caption=f"""🦅 الحساب المساعد الخاص بالبوت:\n{anamee}\n√""",
     reply_markup=InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("♢ ѕᴏụʀᴄᴇ ♢", url=f"https://t.me/FA9SH"),
-                InlineKeyboardButton("♢ ʙᴏᴛ ʟụɴᴀ ♢", url=f"https://t.me/S88DBOT")
-            ],
-            [
                 InlineKeyboardButton(
-                    shad, url=f"https://t.me/{useer}"
+                    aname, url=f"https://t.me/{auser}"
             ),
             ],
             [
