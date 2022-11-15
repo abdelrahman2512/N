@@ -32,7 +32,7 @@
             "required": true,
             "value": "USDDBOT"
         },
-        "ASSISTANT_NAME": {
+        "ASS_USER": {
             "description": "قم بوضع يوزر الحساب المساعد بدون علامة @",
             "required": true,
             "value": "SHADOW_MUSIC0"
@@ -64,19 +64,6 @@
         "BOT_PHOTO": {
             "description": "ضع لينك صورة البوت من هنا @T_ELEGRAPH00BOT",
             "required": true
-        },
-        "DEV_PHOTO": {
-            "description": "ضع لينك صورة حساب مطور البوت من هنا @T_ELEGRAPH00BOT",
-            "required": true
-        },
-        "DEV_NAME": {
-            "description": "ضع اسم حساب التليجرام الخاص بالمطور",
-            "required": true
-        },
-        "ALIVE_NAME": {
-            "description": "ضع هنا اسم الحساب المساعد",
-            "required": true,
-            "value": "𝑺𝑯𝑨𝑫𝑶𝑾 𝑴𝑼𝑺𝑰𝑪"
         },
         "MONGODB_URL": {
             "description": "لا تغيره!",
