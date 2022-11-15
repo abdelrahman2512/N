@@ -18,25 +18,25 @@ async def muamen(client: Client, message: Message):
   shad = usr.first_name
   useer = usr.username
   Bio = user.bio
-    await message.reply_photo(
-        photo=f"https://t.me/S550D",
-        caption=f"""**▷ ᴅᴇᴠ sᴏᴜʀᴄᴇ ʟụɴᴀ ѕʜᴀᴅᴏᴡ ♯**\n**▷ɴᴀᴍᴇ ѕʜᴀᴅᴏᴡ ⇿** {shad}\n**▷ ɪᴅ ѕʜᴀᴅᴏᴡ ⇿** 1970797144\n**▷ ʙɪᴏ ѕʜᴀᴅᴏᴡ ⇿** {Bio}""",
-        reply_markup=InlineKeyboardMarkup(
+  await message.reply_photo(
+    photo=f"https://t.me/S550D",
+    caption=f"""**▷ ᴅᴇᴠ sᴏᴜʀᴄᴇ ʟụɴᴀ ѕʜᴀᴅᴏᴡ ♯**\n**▷ɴᴀᴍᴇ ѕʜᴀᴅᴏᴡ ⇿** {shad}\n**▷ ɪᴅ ѕʜᴀᴅᴏᴡ ⇿** 1970797144\n**▷ ʙɪᴏ ѕʜᴀᴅᴏᴡ ⇿** {Bio}""",
+    reply_markup=InlineKeyboardMarkup(
+        [
             [
-                [
-                    InlineKeyboardButton("♢ ѕᴏụʀᴄᴇ ♢", url=f"https://t.me/FA9SH"),
-                    InlineKeyboardButton("♢ ʙᴏᴛ ʟụɴᴀ ♢", url=f"https://t.me/S88DBOT")
-                ],
-                [
-                    InlineKeyboardButton(
-                        shad, url=f"https://t.me/{useer}"
+                InlineKeyboardButton("♢ ѕᴏụʀᴄᴇ ♢", url=f"https://t.me/FA9SH"),
+                InlineKeyboardButton("♢ ʙᴏᴛ ʟụɴᴀ ♢", url=f"https://t.me/S88DBOT")
+            ],
+            [
+                InlineKeyboardButton(
+                    shad, url=f"https://t.me/{useer}"
+            ),
+            ],
+            [
+                InlineKeyboardButton(
+                   "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
                 ),
-                ],
-                [
-                    InlineKeyboardButton(
-                       "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
-                    ),
-                ],
-            ]
-          )
-        )
+            ],
+        ]
+      )
+    )
