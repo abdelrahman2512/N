@@ -19,37 +19,21 @@ from config import (
 async def cbstart(_, query: CallbackQuery):
     await query.answer("الصفحه الرئيسيه")
     await query.edit_message_text(
-        f"""✨ **مرحبا عزيزي »「 [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) 」!**\n
-💭 **انا بوت استطيع تشغيل الموسيقي والفديو في محادثتك الصوتية**
-
-💡 تعلم طريقة تشغيلي واوامر التحكم بي عن طريق  » 📚 الاوامر !
-
-🔖 لتعلم طريقة تشغيلي بمجموعتك اضغط علي » ❓طريقة التفعيل !
+        f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "• نـصـب بـوتك مـن هـنا •", url="https://t.me/FA9SH/2270",
-                    )
-                ],
-                [InlineKeyboardButton("", callback_data="cbhowtouse")],
-                [
-                    InlineKeyboardButton("📚 الاوامر", callback_data="cbcmds"),
-                    InlineKeyboardButton("❤️ المطور", url=f"https://t.me/{OWNER_NAME}"),
+                    InlineKeyboardButton("الاوامر 📚", callback_data="cbcmds"),
+                    InlineKeyboardButton("ℹ️ حول", callback_data="cbhowtouse"),
                 ],
                 [
-                    InlineKeyboardButton(
-                        "👥 جروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"
-                    ),
-                    InlineKeyboardButton(
-                        "📣 قناة البوت", url=f"https://t.me/FA9SH"
-                    ),
+                    InlineKeyboardButton("تغير اللغه 🌐", callback_data="lang"),
                 ],
                 [
                     InlineKeyboardButton(
                         "ضيـف البـوت لمجمـوعتـك ✅",
-                        url=f"https://t.me/USDDBOT?startgroup=true"
+                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
                     )
                 ],
             ]
