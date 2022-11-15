@@ -12,7 +12,6 @@ from config import (
     GROUP_SUPPORT,
     OWNER_NAME,
     BOT_TOKEN,
-    SUDO_USERS,
     UPDATES_CHANNEL,
 )
 from program import __version__
@@ -95,33 +94,6 @@ async def start_(client: Client, message: Message):
             ]
         ),
     )
-
-
-@Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
-async def muamen(client: Client, message: Message):
-  usrr = await client.get_users(SUDO_USERS)
-  shad = usrr.first_name
-  namee = usrr.mention
-  uuser = usrr.username
-  await message.reply_photo(
-    photo=f"https://t.me/S550D",
-    caption=f"""❲ **Developer Bot** ❳\n— — — — — — — — —\n𖥔 **Dev Name :** {namee}\n𖥔 **Dev User :** @{uuser}\n𖥔 **Dev Id :** {SUDO_USERS}\n𖥔 **Dev Bio :**{Bioo}""",
-    reply_markup=InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton(
-                    shadow, url=f"https://t.me/{uuser}"
-            ),
-            ],
-            [
-                InlineKeyboardButton(
-                   "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
-                ),
-            ],
-        ]
-      )
-    )
-
 
 
 @Client.on_message(command(["ping", f"بينج"]) & ~filters.edited)
