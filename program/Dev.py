@@ -108,9 +108,9 @@ async def muamen(client: Client, message: Message):
 @Client.on_message(command(["المساعد", "الحساب المساعد"]))
 async def muamen(client: Client, message: Message):
   ausr = await client.get_users(ASS_USER)
-  aname = usrr.first_name
-  anamee = usrr.mention
-  auser = usrr.username
+  aname = ausr.first_name
+  anamee = ausr.mention
+  auser = ausr.username
   async for photo in client.iter_profile_photos(ASS_USER, limit=1):
            await message.reply_photo(photo.file_id,       caption=f"""🦅 الحساب المساعد الخاص بالبوت:\n{anamee}\n√""",
     reply_markup=InlineKeyboardMarkup(
