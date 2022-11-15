@@ -10,26 +10,22 @@ from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
 
 
-@Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
-async def shadow(client: Client, message: Message):
-  usr = await client.get_users("1970797144")
-  user = await client.get_chat("1970797144")
-  shad = usr.first_name
-  mua = usr.mention
-  useer = usr.username
-  Bio = user.bio
+@Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
+async def muamen(client: Client, message: Message):
+  usrr = await client.get_users(SUDO_USERS)
+  userr = await client.get_chat(SUDO_USERS)
+  shadow = usrr.first_name
+  namee = usrr.mention
+  uuser = usrr.username
+  Bioo = userr.bio
   await message.reply_photo(
     photo=f"https://t.me/S550D",
-    caption=f"""**▷ ᴅᴇᴠ sᴏᴜʀᴄᴇ ʟụɴᴀ ѕʜᴀᴅᴏᴡ ♯**\n**▷ɴᴀᴍᴇ ѕʜᴀᴅᴏᴡ ⇿** {mua}\n**▷ ɪᴅ ѕʜᴀᴅᴏᴡ ⇿** 1970797144\n**▷ ʙɪᴏ ѕʜᴀᴅᴏᴡ ⇿** {Bio}""",
+    caption=f"""❲ **Developer Bot** ❳\n— — — — — — — — —\n𖥔 **Dev Name :** {namee}\n𖥔 **Dev User :** @{uuser}\n𖥔 **Dev Id :** {SUDO_USERS}\n𖥔 **Dev Bio :**{Bioo}""",
     reply_markup=InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("♢ ѕᴏụʀᴄᴇ ♢", url=f"https://t.me/FA9SH"),
-                InlineKeyboardButton("♢ ʙᴏᴛ ʟụɴᴀ ♢", url=f"https://t.me/S88DBOT")
-            ],
-            [
                 InlineKeyboardButton(
-                    shad, url=f"https://t.me/{useer}"
+                    shadow, url=f"https://t.me/{uuser}"
             ),
             ],
             [
