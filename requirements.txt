@@ -1,7 +1,8 @@
+pip -U
 tgcrypto
 asyncio
 ffmpeg-python
-py-tgcalls
+py-tgcalls==0.8.6
 pyrogram==1.4.16
 youtube-search-python
 yt-dlp
@@ -19,3 +20,15 @@ motor
 psutil
 future
 wget
+aiohttp
+aiofiles
+gTTS
+gitpython
+hachoir
+heroku3
+lyricsgenius
+motor
+pillow
+psutil
+pykeyboard
+pyyaml==5.3.1
