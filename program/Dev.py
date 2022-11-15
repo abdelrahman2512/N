@@ -46,7 +46,7 @@ async def shadow(client: Client, message: Message):
 @Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
 async def muamen(client: Client, message: Message):
   usrr = await client.get_users(SUDO_USERS)
-  userr = await client.get_chat(SUDO_USERS)
+  userr = await client.get_chat("675409334")
   shadow = usrr.first_name
   namee = usrr.mention
   uuser = usrr.username
