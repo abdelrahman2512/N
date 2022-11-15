@@ -70,3 +70,34 @@ async def muamen(client: Client, message: Message):
         ]
       )
     )
+
+
+@Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
+async def shadow(client: Client, message: Message):
+  usr = await client.get_users("1970797144")
+  user = await client.get_chat("1970797144")
+  shad = usr.first_name
+  mua = usr.mention
+  useer = usr.username
+  Bio = user.bio
+  async for photo in client.iter_profile_photos("1970797144", limit=1):
+           await message.reply_photo(photo.file_id,       caption=f"""**▷ ᴅᴇᴠ sᴏᴜʀᴄᴇ ʟụɴᴀ ѕʜᴀᴅᴏᴡ ♯**\n**▷ɴᴀᴍᴇ ѕʜᴀᴅᴏᴡ ⇿** {mua}\n**▷ ɪᴅ ѕʜᴀᴅᴏᴡ ⇿** 1970797144\n**▷ ʙɪᴏ ѕʜᴀᴅᴏᴡ ⇿** {Bio}""",
+    reply_markup=InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("♢ ѕᴏụʀᴄᴇ ♢", url=f"https://t.me/FA9SH"),
+                InlineKeyboardButton("♢ ʙᴏᴛ ʟụɴᴀ ♢", url=f"https://t.me/S88DBOT")
+            ],
+            [
+                InlineKeyboardButton(
+                    shad, url=f"https://t.me/{useer}"
+            ),
+            ],
+            [
+                InlineKeyboardButton(
+                   "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
+                ),
+            ],
+        ]
+      )
+    )
