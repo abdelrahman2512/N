@@ -1,16 +1,12 @@
 import asyncio
 from pytgcalls import idle
-from driver.veez import call_py, bot, user
-
+from driver.veez import call_py, bot
 
 async def start_bot():
+    print("[INFO]: STARTING BOT CLIENT")
     await bot.start()
-    print("[INFO]: BOT & UBOT CLIENT STARTED !!")
+    print("[INFO]: STARTING PYTGCALLS CLIENT")
     await call_py.start()
-    print("[INFO]: PY-TGCALLS CLIENT STARTED !!")
-    await user.join_chat("S150D")
-    await user.join_chat("FA9SH")
-    await user.join_chat("shadow0168")
     await idle()
     print("[INFO]: STOPPING BOT & USERBOT")
     await bot.stop()
