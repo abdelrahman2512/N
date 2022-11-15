@@ -78,7 +78,7 @@ async def shadow(client: Client, message: Message):
 
 
 @Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
-async def muamen(client: Client, message: Message):
+async def dev(client: Client, message: Message):
   dusr = await client.get_users(SUDO_USERS)
   duser = await client.get_chat(SUDO_USERS)
   shad = dusr.first_name
