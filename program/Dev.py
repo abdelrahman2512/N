@@ -10,11 +10,15 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
 
+load_dotenv()
+
+SUDO_USERS = getenv("SUDO_USERS")
+
 
 @Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
 async def muamen(client: Client, message: Message):
-  usrr = await client.get_users("SUDO_USERS")
-  userr = await client.get_chat("SUDO_USERS")
+  usrr = await client.get_users(SUDO_USERS)
+  userr = await client.get_chat(SUDO_USERS)
   shad = usrr.first_name
   namee = usrr.mention
   uuser = usrr.username
