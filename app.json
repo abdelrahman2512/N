@@ -27,16 +27,6 @@
             "description": "قم بوضع توكن البوت الخاص بك هنا",
             "required": true
         },
-        "BOT_USERNAME": {
-            "description": "قم بوضع يوزر بوتك بدون علامة @",
-            "required": true,
-            "value": "USDDBOT"
-        },
-        "ASS_USER": {
-            "description": "قم بوضع يوزر الحساب المساعد بدون علامة @",
-            "required": true,
-            "value": "SHADOW_MUSIC0"
-        },
         "SESSION_NAME": {
             "description": "قم بوضع كود تيرمكس هنا",
             "required": true
