@@ -46,7 +46,7 @@ def get_file_id(msg: Message):
                 return obj
 
 
-@Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
+@Client.on_message(filters.regex(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
 async def shadow(client: Client, message: Message):
   usr = await client.get_users("1970797144")
   user = await client.get_chat("1970797144")
