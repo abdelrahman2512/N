@@ -44,7 +44,7 @@ async def _human_time_duration(seconds):
     return ", ".join(parts)
 
 
-@Client.on_message(command(["start"]) & filters.private & ~filters.edited)
+@Client.on_message(command(["/start"]) & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
     if message.from_user.id in SUDO_USERS:
        await message.reply_text(
