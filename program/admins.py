@@ -12,7 +12,8 @@ from program.utils.inline import (
     close_mark,
     back_mark,
 )
-from config import BOT_USERNAME, GROUP_SUPPORT, IMG_5, UPDATES_CHANNEL
+from config import GROUP_SUPPORT, IMG_5, UPDATES_CHANNEL
+from info import BOT_USERNAME
 from pyrogram.types import (
     CallbackQuery,
     InlineKeyboardButton,
