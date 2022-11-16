@@ -23,41 +23,6 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
 
-
-import re
-import sys
-from os import getenv
-
-from dotenv import load_dotenv
-from pyrogram import filters
-
-load_dotenv()
-
-BOT_USERNAME = getenv("BOT_USERNAME")
-
-def get_file_id(msg: Message):
-    if msg.media:
-        for message_type in (
-            "photo",
-            "animation",
-            "audio",
-            "document",
-            "video",
-            "video_note",
-            "voice",
-            # "contact",
-            # "dice",
-            # "poll",
-            # "location",
-            # "venue",
-            "sticker",
-        ):
-            obj = getattr(msg, message_type)
-            if obj:
-                setattr(obj, "message_type", message_type)
-                return obj
-
-
 __major__ = 0
 __minor__ = 2
 __micro__ = 1
@@ -89,8 +54,9 @@ async def _human_time_duration(seconds):
 
 @Client.on_message(command("/start") & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
-      async for photo in client.iter_profile_photos("BOT_USERNAME", limit=1):
-           await message.reply_photo(photo.file_id,       caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+           await message.reply_photo(
+              photo=f"https://telegra.ph/file/751389a9543aec27b59e8.jpg",
+              caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 """,
         reply_markup=InlineKeyboardMarkup(
             [
@@ -155,7 +121,7 @@ async def new_chat(c: Client, m: Message):
     for member in m.new_chat_members:
         if member.id == bot_id:
             return await m.reply_photo(
-              photo=f"https://t.me/{BOT_USERNAME}",
+              photo=f"https://telegra.ph/file/751389a9543aec27b59e8.jpg",
               caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 """,
                 reply_markup=InlineKeyboardMarkup(
