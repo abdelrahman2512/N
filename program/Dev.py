@@ -106,7 +106,7 @@ async def dev(client: Client, message: Message):
 
 @Client.on_message(command(["المساعد", "الحساب المساعد"]))
 async def muamen(client: Client, message: Message):
-  ausr = await client.get_users(ASS_USER)
+  ausr = await client.get_users(ASSISTANT_NAME)
   aname = ausr.first_name
   anamee = ausr.mention
   auser = ausr.username
@@ -127,8 +127,3 @@ async def muamen(client: Client, message: Message):
         ]
       )
     )
-
-
-@Client.on_message(command(["بوت", "البوت"]))
-async def madison(client: Client, message: Message):
-    await message.reply_text("اسمى شادو ياحب 🙄❤️")
