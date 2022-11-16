@@ -4,6 +4,8 @@ from time import time
 from driver.veez import user as USER
 from config import (
     UPDATES_CHANNEL,
+    SUBSCRIBE,
+    FORCE_SUBSCRIBE_TEXT,
     BOT_USERNAME, 
     SUDO_USERS,
 )
@@ -46,6 +48,27 @@ async def _human_time_duration(seconds):
 
 @Client.on_message(command(["/start"]) & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
+    if SUBSCRIBE == "y":
+        try:
+           statusch = await client.get_chat_member(f"@FA9SH", message.from_user.id)
+           if not statusch.status:
+              await message.reply_text(
+              text=FORCE_SUBSCRIBE_TEXT,
+              reply_markup=InlineKeyboardMarkup(
+                  [[InlineKeyboardButton(text="اشترك في قناة البوت", 
+                  url=f"https://telegram.me/FA9SH")]]
+            )
+         )
+              return
+        except Exception as error:
+            await message.reply_text(
+            text=FORCE_SUBSCRIBE_TEXT,
+            reply_markup=InlineKeyboardMarkup(
+                  [[InlineKeyboardButton(text="اشترك في قناة البوت", 
+                  url=f"https://telegram.me/FA9SH")]]
+            )
+         )
+            return
     if message.from_user.id in SUDO_USERS:
        await message.reply_text(
                 "اهلا عزيزي المطور\nاليك لوحة التحكم الخاصة بالبوت",
