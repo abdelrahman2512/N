@@ -131,13 +131,8 @@ async def muamen(client: Client, message: Message):
 
 @Client.on_message(command(["بوت", "البوت"]))
 async def dev(client: Client, message: Message):
-  BOT = [
-لول, 
-لول تاني,
-وههههههه,
-]
   async for photo in client.iter_profile_photos(BOT_USERNAME, limit=1):
-           await message.reply_photo(photo.file_id,       caption=BOT,
+           await message.reply_photo(photo.file_id,       caption=(["لول", "لول تاني", "وههههههه"]),
     reply_markup=InlineKeyboardMarkup(
         [
             [
