@@ -118,30 +118,6 @@ async def start_(client: Client, message: Message):
             ]
         ),
     )
-        except Exception as error:
-         await message.reply_photo(
-            photo=f"https://telegra.ph/file/751389a9543aec27b59e8.jpg",
-            caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("الاوامر 📚", callback_data="cbcmds"),
-                    InlineKeyboardButton("ℹ️ حول", callback_data="cbhowtouse"),
-                ],
-                [
-                    InlineKeyboardButton("تغير اللغه 🌐", callback_data="lang"),
-                ],
-                [
-                    InlineKeyboardButton(
-                        "ضيـف البـوت لمجمـوعتـك ✅",
-                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
-                    )
-                ],
-            ]
-        ),
-    )
-
 
 @Client.on_message(command(["ping", f"بينج"]) & ~filters.edited)
 async def ping_pong(client: Client, message: Message):
