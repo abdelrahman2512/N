@@ -14,7 +14,6 @@ from pyrogram import Client, filters
 from pyrogram import __version__ as pyrover
 from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ReplyKeyboardMarkup
-import speedtest
 
 __major__ = 0
 __minor__ = 2
