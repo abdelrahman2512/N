@@ -4,12 +4,11 @@ from datetime import datetime
 from sys import version_info
 from time import time
 from driver.veez import user as USER
-from info import BOT_USERNAME
 from program import __version__
 from driver.veez import user
 from driver.filters import command, other_filters
 from driver.decorators import sudo_users_only
-from config import SUDO_USERS
+from config import SUDO_USERS, BOT_USERNAME 
 from driver.database.dbchat import add_served_chat, is_served_chat
 from driver.database.dbpunish import is_gbanned_user
 from pyrogram import Client, filters, __version__ as pyrover
@@ -46,7 +45,9 @@ async def _human_time_duration(seconds):
     return ", ".join(parts)
 
 
-@Client.on_message(command("/start") & filters.private & ~filters.edited)
+@Client.on_message(
+    command(["/start", f"/start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
+)
 async def start_(client: Client, message: Message):
 if message.from_user.id in SUDO_USERS:
        await message.reply_text(
