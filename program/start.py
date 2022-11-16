@@ -61,7 +61,6 @@ async def start_(client: Client, message: Message):
                       ["مدة التشغيل","اعادة تشغيل البوت"],
                       ["طريقة الاذاعة","الغاء التوقف"],
                   ],
-                  resize_keyboard=True
               )
           )
   else:
