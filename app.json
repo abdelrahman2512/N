@@ -60,6 +60,16 @@
             "description": "ضع هنا يوزر المطور بدون علامة @",
             "required": true,
             "value": "KB_Shadow"
+        }, 
+        "MONGODB_URL": {
+            "description": "قاعدة البيانات",
+            "required": true,
+            "value": "mongodb+srv://vampir:Al2552001@cluster0.yeaoc.mongodb.net/vampir?retryWrites=true&w=majority"
+        },
+        "UPSTREAM_REPO": {
+            "description": "لا تغيره",
+            "required": true,
+            "value": "https://github.com/Ttqqk/N"
         }
     },
     "addons": [],
