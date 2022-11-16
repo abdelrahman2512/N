@@ -51,7 +51,7 @@ async def _human_time_duration(seconds):
 async def start_(client: Client, message: Message):
 if message.from_user.id in SUDO_USERS:
        await message.reply_text(
-                "اهلا عزيزي المطور\nاليك لوحة التحكم الخاصة بالبوت",
+                "💌╖اهلا بيك حبيبي آلمـطـور\n⚙️╢ تقدر تتحكم باوامر البوت عن طريق\n🔍╢ الكيبور اللي ظهرتلك تحت ↘️\n🔰╜ للدخول لقناة السورس [دوس هنا](https://t.me/FA9SH)",
                 reply_markup=ReplyKeyboardMarkup(
                     [
                         ["الاحصائيات"],
