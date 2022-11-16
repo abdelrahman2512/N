@@ -3,19 +3,13 @@ import asyncio
 from datetime import datetime
 from sys import version_info
 from time import time
-
-from config import (
-    BOT_PHOTO,
-    BOT_USERNAME,
-    GROUP_SUPPORT,
-    OWNER_NAME,
-    BOT_TOKEN,
-    UPDATES_CHANNEL,
-)
+from driver.veez import user as USER
+from info import BOT_USERNAME
 from program import __version__
 from driver.veez import user
 from driver.filters import command, other_filters
 from driver.decorators import sudo_users_only
+from config import SUDO_USERS
 from driver.database.dbchat import add_served_chat, is_served_chat
 from driver.database.dbpunish import is_gbanned_user
 from pyrogram import Client, filters, __version__ as pyrover
@@ -54,8 +48,25 @@ async def _human_time_duration(seconds):
 
 @Client.on_message(command("/start") & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
+if message.from_user.id in SUDO_USERS:
+       await message.reply_text(
+                "اهلا عزيزي المطور\nاليك لوحة التحكم الخاصة بالبوت",
+                reply_markup=ReplyKeyboardMarkup(
+                    [
+                        ["الاحصائيات"],
+                        ["اختبار الحساب المساعد","مغادرة الحساب المساعد من المجموعات"],
+                        ["تنصيب php البوت"],
+                        ["معلومات السيرفر ","بينج السيرفر","قياس سرعة السيرفر"],
+                        ["مدة التشغيل","اعادة تشغيل البوت"],
+                        ["طريقة الاذاعة","الغاء التوقف"],
+                    ],
+                    resize_keyboard=True
+                )
+            )
+    else:
+        try:
            await message.reply_photo(
-              photo=f"https://telegra.ph/file/751389a9543aec27b59e8.jpg",
+           photo=f"https://t.me/{BOT_USERNAME}",
               caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 """,
         reply_markup=InlineKeyboardMarkup(
