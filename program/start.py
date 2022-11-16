@@ -1,19 +1,18 @@
+import asyncio
+
 from datetime import datetime
 from sys import version_info
 from time import time
 from driver.veez import user as USER
-from config import (
-    UPDATES_CHANNEL,
-    SUBSCRIBE,
-    FORCE_SUBSCRIBE_TEXT,
-    BOT_USERNAME, 
-    SUDO_USERS,
-)
-from driver.decorators import sudo_users_only
 from program import __version__
+from driver.veez import user
 from driver.filters import command, other_filters
-from pyrogram import Client, filters
-from pyrogram import __version__ as pyrover
+from driver.decorators import sudo_users_only
+from config import SUDO_USERS, BOT_USERNAME, SUBSCRIBE, FORCE_SUBSCRIBE_TEXT, UPDATES_CHANNEL
+from driver.database.dbchat import add_served_chat, is_served_chat
+from driver.database.dbpunish import is_gbanned_user
+from pyrogram import Client, filters, __version__ as pyrover
+from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ReplyKeyboardMarkup
 
@@ -42,21 +41,23 @@ async def _human_time_duration(seconds):
     for unit, div in TIME_DURATION_UNITS:
         amount, seconds = divmod(int(seconds), div)
         if amount > 0:
-            parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else ""))
+            parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else "s"))
     return ", ".join(parts)
 
 
-@Client.on_message(command(["/start"]) & filters.private & ~filters.edited)
+@Client.on_message(
+    command(["/start", f"/start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
+)
 async def start_(client: Client, message: Message):
     if SUBSCRIBE == "y":
         try:
-           statusch = await client.get_chat_member(f"@FA9SH", message.from_user.id)
+           statusch = await client.get_chat_member(f"@{UPDATES_CHANNEL}", message.from_user.id)
            if not statusch.status:
               await message.reply_text(
               text=FORCE_SUBSCRIBE_TEXT,
               reply_markup=InlineKeyboardMarkup(
                   [[InlineKeyboardButton(text="اشترك في قناة البوت", 
-                  url=f"https://telegram.me/FA9SH")]]
+                  url=f"https://telegram.me/{UPDATES_CHANNEL}")]]
             )
          )
               return
@@ -65,21 +66,19 @@ async def start_(client: Client, message: Message):
             text=FORCE_SUBSCRIBE_TEXT,
             reply_markup=InlineKeyboardMarkup(
                   [[InlineKeyboardButton(text="اشترك في قناة البوت", 
-                  url=f"https://telegram.me/FA9SH")]]
+                  url=f"https://telegram.me/{UPDATES_CHANNEL}")]]
             )
          )
             return
     if message.from_user.id in SUDO_USERS:
        await message.reply_text(
-                "اهلا عزيزي المطور\nاليك لوحة التحكم الخاصة بالبوت",
+                "💌╖اهلا بيك حبيبي آلمـطـور\n⚙️╢ تقدر تتحكم باوامر البوت عن طريق\n🔍╢ الكيبور اللي ظهرتلك تحت ↘️\n🔰╜ للدخول لقناة السورس [دوس هنا](https://t.me/FA9SH)",
                 reply_markup=ReplyKeyboardMarkup(
                     [
-                        ["الاحصائيات"],
-                        ["اختبار الحساب المساعد","مغادرة الحساب المساعد من المجموعات"],
-                        ["تنصيب php البوت"],
-                        ["معلومات السيرفر ","بينج السيرفر","قياس سرعة السيرفر"],
-                        ["مدة التشغيل","اعادة تشغيل البوت"],
-                        ["طريقة الاذاعة","الغاء التوقف"],
+                        ["مبرمج السورس"],
+                        ["السورس","المطور"],
+                        ["الحساب المساعد"],
+                        ["الغاء"],
                     ],
                     resize_keyboard=True
                 )
@@ -88,58 +87,124 @@ async def start_(client: Client, message: Message):
         try:
            await message.reply_photo(
            photo=f"https://t.me/{BOT_USERNAME}",
-           caption=f"""✨ **مرحبا {message.from_user.mention()} **\n
-💭 **انا بوت استطيع تشغيل الموسيقي والفديو في محادثتك الصوتية
-💡 **تعلم طريقة تشغيلي واوامر التحكم بي عن طريق  » 📚 الاوامر !**
-
-🔖 **لتعلم طريقة تشغيلي بمجموعتك اضغط علي » ❓اوامر اساسيه **
-معرف الحساب المساعد """,
-           reply_markup=InlineKeyboardMarkup(
-               [
-                   [
-                       InlineKeyboardButton("➕ أضفني لمجموعتك ➕",
-                           url=f"https://t.me/S88DBOT?startgroup=true",
-                       )
-                   ],
-                   [InlineKeyboardButton("❓ الاوامر الاساسيه", callback_data="cbhowtouse")],
-                   [
-                       InlineKeyboardButton("📚 الاوامر", callback_data="cbcmds"),
-                       InlineKeyboardButton("❤️ المطور", url=f"https://t.me/S150D"),
-                   ],
-                   [
-                       InlineKeyboardButton(
-                          "📣 قناة البوت", url=f"https://t.me/FA9SH"
-                       ),
-                   ],
-               ]
-             )
-           )
+           caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("الاوامر 📚", callback_data="cbcmds"),
+                    InlineKeyboardButton("ℹ️ حول", callback_data="cbhowtouse"),
+                ],
+                [
+                    InlineKeyboardButton("تغير اللغه 🌐", callback_data="lang"),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "ضيـف البـوت لمجمـوعتـك ✅",
+                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
+                    )
+                ],
+            ]
+        ),
+    )
         except Exception as error:
-           await message.reply_photo(
-           photo="https://telegra.ph/file/832677391b763af9c84da.jpg",
-           caption=f"""✨ **مرحبا {message.from_user.mention()} **\n
-💭 **انا بوت استطيع تشغيل الموسيقي والفديو في محادثتك الصوتية
-💡 **تعلم طريقة تشغيلي واوامر التحكم بي عن طريق  » 📚 الاوامر !**
+         await message.reply_photo(
+            photo=f"https://telegra.ph/file/751389a9543aec27b59e8.jpg",
+            caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("الاوامر 📚", callback_data="cbcmds"),
+                    InlineKeyboardButton("ℹ️ حول", callback_data="cbhowtouse"),
+                ],
+                [
+                    InlineKeyboardButton("تغير اللغه 🌐", callback_data="lang"),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "ضيـف البـوت لمجمـوعتـك ✅",
+                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
+                    )
+                ],
+            ]
+        ),
+    )
 
-🔖 **لتعلم طريقة تشغيلي بمجموعتك اضغط علي » ❓اوامر اساسيه **
-معرف الحساب المساعد @""",
-           reply_markup=InlineKeyboardMarkup(
-               [
-                   [
-                       InlineKeyboardButton("➕ أضفني لمجموعتك ➕",
-                           url=f"https://t.me/S88DBOT?startgroup=true",
-                       )
-                   ],
-                   [InlineKeyboardButton("❓ الاوامر الاساسيه", callback_data="cbhowtouse")],
-                   [
-                       InlineKeyboardButton("📚 الاوامر", callback_data="cbcmds"),
-                       InlineKeyboardButton("❤️ المطور", url=f"https://t.me/S150D"),
-                   ],
-                   [
-                       InlineKeyboardButton(
-                          "📣 قناة البوت", url=f"https://t.me/FA9SH"
-                       ),
-                   ],
-               ]
-             )
-           )
+
+@Client.on_message(command(["ping", f"بينج"]) & ~filters.edited)
+async def ping_pong(client: Client, message: Message):
+    start = time()
+    m_reply = await message.reply_text("pinging...")
+    delta_ping = time() - start
+    await m_reply.edit_text("🏓 `PONG!!`\n" f"⚡️ `{delta_ping * 1000:.3f} ms`")
+
+
+@Client.on_message(command(["uptime", f"uptime@{BOT_USERNAME}"]) & ~filters.edited)
+async def get_uptime(client: Client, message: Message):
+    current_time = datetime.utcnow()
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
+    await message.reply_text(
+        "🤖 bot status:\n"
+        f"• **uptime:** `{uptime}`\n"
+        f"• **start time:** `{START_TIME_ISO}`"
+    )
+
+
+@Client.on_chat_join_request()
+async def approve_join_chat(c: Client, m: ChatJoinRequest):
+    if not m.from_user:
+        return
+    try:
+        await c.approve_chat_join_request(m.chat.id, m.from_user.id)
+    except FloodWait as e:
+        await asyncio.sleep(e.x + 2)
+        await c.approve_chat_join_request(m.chat.id, m.from_user.id)
+
+
+@Client.on_message(filters.new_chat_members)
+async def new_chat(c: Client, m: Message):
+    chat_id = m.chat.id
+    if await is_served_chat(chat_id):
+        pass
+    else:
+        await add_served_chat(chat_id)
+    ass_uname = (await user.get_me()).username
+    bot_id = (await c.get_me()).id
+    for member in m.new_chat_members:
+        if member.id == bot_id:
+            return await m.reply_photo(
+              photo=f"https://telegra.ph/file/751389a9543aec27b59e8.jpg",
+              caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+""",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                        "ضيـف البـوت لمجمـوعتـك ✅",
+                        url=f'https://t.me/{BOT_USERNAME}?startgroup=true'),
+                        ],
+                    ]
+                )
+            )
+
+
+chat_watcher_group = 5
+
+@Client.on_message(group=chat_watcher_group)
+async def chat_watcher_func(_, message: Message):
+    try:
+        userid = message.from_user.id
+    except Exception:
+        return
+    suspect = f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
+    if await is_gbanned_user(userid):
+        try:
+            await message.chat.ban_member(userid)
+        except Exception:
+            return
+        await message.reply_text(
+            f"👮🏼 (> {suspect} <)\n\n**Gbanned** user detected, that user has been gbanned by sudo user and was blocked from this Chat !\n\n🚫 **Reason:** potential spammer and abuser."
+        )
+
