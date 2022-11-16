@@ -3,7 +3,8 @@ import asyncio
 from sys import version_info
 from program import __version__
 from driver.veez import user
-from config import SUDO_USERS, ASS_USER 
+from config import SUDO_USERS
+from info import ASSISTANT_NAME
 from driver.filters import command, other_filters
 from pyrogram import Client, filters, __version__ as pyrover
 from pyrogram.errors import FloodWait, MessageNotModified
@@ -21,7 +22,7 @@ load_dotenv()
 
 SUDO_USERS = getenv("SUDO_USERS")
 
-ASS_USER = getenv("ASS_USER")
+ASSISTANT_NAME = getenv("ASSISTANT_NAME")
 
 def get_file_id(msg: Message):
     if msg.media:
@@ -110,7 +111,7 @@ async def muamen(client: Client, message: Message):
   aname = ausr.first_name
   anamee = ausr.mention
   auser = ausr.username
-  async for photo in client.iter_profile_photos(ASS_USER, limit=1):
+  async for photo in client.iter_profile_photos(ASSISTANT_NAME, limit=1):
            await message.reply_photo(photo.file_id,       caption=f"""🦅 الحساب المساعد الخاص بالبوت:\n{anamee}\n√""",
     reply_markup=InlineKeyboardMarkup(
         [
