@@ -3,7 +3,7 @@ import asyncio
 from sys import version_info
 from program import __version__
 from driver.veez import user
-from config import SUDO_USERS, ASS_USER
+from config import SUDO_USERS, ASS_USER, BOT_USERNAME 
 from driver.filters import command, other_filters
 from pyrogram import Client, filters, __version__ as pyrover
 from pyrogram.errors import FloodWait, MessageNotModified
@@ -122,6 +122,32 @@ async def muamen(client: Client, message: Message):
             [
                 InlineKeyboardButton(
                    "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
+                ),
+            ],
+        ]
+      )
+    )
+
+
+@Client.on_message(command(["بوت", "البوت"]))
+async def dev(client: Client, message: Message):
+BOT = [
+لول, 
+لول تاني,
+وههههههه,
+]
+  async for photo in client.iter_profile_photos(BOT_USERNAME, limit=1):
+           await message.reply_photo(photo.file_id,       caption=BOT,
+    reply_markup=InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    shad, url=f"https://t.me/{uuser}"
+            ),
+            ],
+            [
+                InlineKeyboardButton(
+                   "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
                 ),
             ],
         ]
