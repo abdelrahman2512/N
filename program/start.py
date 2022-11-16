@@ -16,6 +16,17 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ReplyKeyboardMarkup, ChatJoinRequest
 
+import re
+import sys
+from os import getenv
+
+from dotenv import load_dotenv
+from pyrogram import filters
+
+load_dotenv()
+
+BOT_USERNAME = getenv("BOT_USERNAME")
+
 __major__ = 0
 __minor__ = 2
 __micro__ = 1
