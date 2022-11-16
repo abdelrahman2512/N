@@ -131,7 +131,7 @@ async def muamen(client: Client, message: Message):
 
 @Client.on_message(command(["بوت", "البوت"]))
 async def dev(client: Client, message: Message):
-BOT = [
+  BOT = [
 لول, 
 لول تاني,
 وههههههه,
