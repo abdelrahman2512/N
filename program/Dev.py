@@ -4,7 +4,7 @@ from sys import version_info
 from program import __version__
 from driver.veez import user
 from config import SUDO_USERS, ASS_USER
-from driver.filters import command, other_filters
+from driver.filters import command, other_filters, filters.regex
 from pyrogram import Client, filters, __version__ as pyrover
 from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import (__version__ as pytover)
@@ -46,7 +46,7 @@ def get_file_id(msg: Message):
                 return obj
 
 
-@Client.on_message(regex(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"])) & filters.group
+@Client.on_message(filters.regex(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
 async def shadow(client: Client, message: Message):
   usr = await client.get_users("1970797144")
   user = await client.get_chat("1970797144")
