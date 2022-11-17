@@ -15,4 +15,6 @@ async def muamen(client: Client, message: Message):
   usr = await client.get_users(message.from_user.id)
   name = usr.first_name
   namee = usr.last_name
-  await message.reply_text("🦅 اسمك الاول » {`{name}`}\n🦅 اسمك الثاني » {`{namee}`}")
+  await message.reply_text(
+f"🦅 اسمك الاول » {`{name}`}
+🦅 اسمك الثاني » {`{namee}`}")
