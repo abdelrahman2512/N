@@ -130,7 +130,7 @@ async def muamen(client: Client, message: Message):
 
 
 @Client.on_message(command(["السورس", "سورس"]))
-async def madison(client: Client, message: Message):
+async def source(client: Client, message: Message):
   sousr = await client.get_users("1970797144")
   sohad = sousr.first_name
   souser = sousr.username
