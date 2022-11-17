@@ -16,17 +16,6 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ReplyKeyboardMarkup, ChatJoinRequest
 
-import re
-import sys
-from os import getenv
-
-from dotenv import load_dotenv
-from pyrogram import filters
-
-load_dotenv()
-
-BOT_USERNAME = getenv("BOT_USERNAME")
-
 __major__ = 0
 __minor__ = 2
 __micro__ = 1
@@ -55,27 +44,6 @@ async def _human_time_duration(seconds):
             parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else "s"))
     return ", ".join(parts)
 
-def get_file_id(msg: Message):
-    if msg.media:
-        for message_type in (
-            "photo",
-            "animation",
-            "audio",
-            "document",
-            "video",
-            "video_note",
-            "voice",
-            # "contact",
-            # "dice",
-            # "poll",
-            # "location",
-            # "venue",
-            "sticker",
-        ):
-            obj = getattr(msg, message_type)
-            if obj:
-                setattr(obj, "message_type", message_type)
-                return obj
 
 @Client.on_message(
     command(["/start", f"/start@{BOT_USERNAME}"]) & filters.private & ~filters.edited
