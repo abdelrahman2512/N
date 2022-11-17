@@ -131,23 +131,27 @@ async def muamen(client: Client, message: Message):
 
 @Client.on_message(command(["السورس", "سورس"]))
 async def madison(client: Client, message: Message):
-    await message.reply_text("╭──── • ◈ • ────╮\n么 [𝗦𝗢𝗨𝗥𝗖𝗘 𝗠𝗘𝗚𝗔](t.me/FA9SH)\n么 [𝗔𝗦𝗞 𝗧𝗢 𝗠𝗘](t.me/S88DBOT)\n么 [𝑺𝑯𝑨𝑫𝑶𝑾](t.me/S550D)\n╰──── • ◈ • ────╯\n⍟ 𝚃𝙷𝙴 𝙱𝙴𝚂𝚃 𝚂𝙾𝚄𝚁𝙲𝙴 𝙾𝙽 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼")
-    reply_markup=InlineKeyboardMarkup(
-        [
+    await message.reply_text(
+        f"""
+╭──── • ◈ • ────╮\n么 [𝗦𝗢𝗨𝗥𝗖𝗘 𝗠𝗘𝗚𝗔](t.me/FA9SH)\n么 [𝗔𝗦𝗞 𝗧𝗢 𝗠𝗘](t.me/S88DBOT)\n么 [𝑺𝑯𝑨𝑫𝑶𝑾](t.me/S550D)\n╰──── • ◈ • ────╯\n⍟ 𝚃𝙷𝙴 𝙱𝙴𝚂𝚃 𝚂𝙾𝚄𝚁𝙲𝙴 𝙾𝙽 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼
+""",
+        reply_markup=InlineKeyboardMarkup(
             [
-                InlineKeyboardButton(
-                    shad, url=f"https://t.me/{useer}"
-            ),
-            ],
-            [
-                InlineKeyboardButton(
-                   "CH SOURCE", url=f"https://t.me/FA9SH"
-            ),
-            ],
-            [
-                InlineKeyboardButton(
-                   "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
+                [
+                    InlineKeyboardButton(
+                        shad, url=f"https://t.me/{useer}"
                 ),
-            ],
-        ]
-      )
+                ],
+                [
+                    InlineKeyboardButton(
+                       "CH SOURCE", url=f"https://t.me/FA9SH"
+                ),
+                ],
+                [
+                    InlineKeyboardButton(
+                       "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/S88DBOT?startgroup=true"
+                    ),
+                ],
+            ]
+          )
+       )
