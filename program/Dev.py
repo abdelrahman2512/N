@@ -131,6 +131,9 @@ async def muamen(client: Client, message: Message):
 
 @Client.on_message(command(["السورس", "سورس"]))
 async def madison(client: Client, message: Message):
+  sousr = await client.get_users("1970797144")
+  sohad = sousr.first_name
+  souser = sousr.username
     await message.reply_text(
         f"""
 ╭──── • ◈ • ────╮\n么 [𝗦𝗢𝗨𝗥𝗖𝗘 𝗠𝗘𝗚𝗔](t.me/FA9SH)\n么 [𝗔𝗦𝗞 𝗧𝗢 𝗠𝗘](t.me/S88DBOT)\n么 [𝑺𝑯𝑨𝑫𝑶𝑾](t.me/S550D)\n╰──── • ◈ • ────╯\n⍟ 𝚃𝙷𝙴 𝙱𝙴𝚂𝚃 𝚂𝙾𝚄𝚁𝙲𝙴 𝙾𝙽 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼
@@ -139,7 +142,7 @@ async def madison(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        shad, url=f"https://t.me/{useer}"
+                        sohad, url=f"https://t.me/{souser}"
                 ),
                 ],
                 [
