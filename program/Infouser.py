@@ -10,9 +10,22 @@ from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
 
 
-@Client.on_message(command(["اسمي"]))
-async def muamen(client: Client, message: Message):
-  usr = await client.get_users(message.from_user.id)
-  name = usr.first_name
-  namee = usr.last_name
-  await message.reply_text(f"🦅 اسمك الاول » {`{name}`}\n🦅 اسمك الثاني » {`{namee}`}")
+@aClient.on_message(
+    command(["اسمي"])
+    & ~filters.edited
+)
+async def khalid(client: Client, message: Message):
+    usr = await client.get_users(message.from_user.id)
+    name = usr.first_name
+    async for photo in client.iter_profile_photos(message.from_user.id, limit=1):
+                    await message.reply_text( 
+                    f"""ٲسـمـك💕 ⇐ {message.from_user.mention}""", 
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "╞. 𝐒𝐨𝐮𝐫𝐜𝐞 .╡", url=f"https://t.me/Source_Frozen"),
+                ],
+            ]
+        ),
+    )
