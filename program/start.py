@@ -41,7 +41,7 @@ async def _human_time_duration(seconds):
     for unit, div in TIME_DURATION_UNITS:
         amount, seconds = divmod(int(seconds), div)
         if amount > 0:
-            parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else "s"))
+            parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else ""))
     return ", ".join(parts)
 
 
@@ -86,7 +86,7 @@ async def start_(client: Client, message: Message):
     else:
         try:
            await message.reply_photo(
-           photo=f"https://telegra.ph/file/1d46c3de641cf4ddf8415.jpg",
+           photo=f"https://t.me/{BOT_USERNAME}",
            caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 🎤╖ أهلآ بك عزيزي أنا بوت شادو
 ⚙️╢ وظيفتي حماية المجموعات
@@ -94,28 +94,72 @@ async def start_(client: Client, message: Message):
 🔘╢ أضِف البوت إلى مجموعتك
 ⚡️╢ ارفعهُ » مشرف
 ⬆️╜ سيتم ترقيتك مالك في البوت
-ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("الاوامر 📚", callback_data="cbcmds"),
-                    InlineKeyboardButton("ℹ️ حول", callback_data="cbhowtouse"),
-                ],
-                [
-                    InlineKeyboardButton("تغير اللغه 🌐", callback_data="lang"),
-                ],
-                [
-                    InlineKeyboardButton(
-                        "ضيـف البـوت لمجمـوعتـك ✅",
-                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
-                    )
-                ],
-            ]
-        ),
+ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ""",
+           reply_markup=InlineKeyboardMarkup(
+               [
+                   [
+                       InlineKeyboardButton("الاوامر 📚", callback_data="cbcmds"),
+                       InlineKeyboardButton("ℹ️ حول", callback_data="cbhowtouse"),
+                   ],
+                   [
+                       InlineKeyboardButton("تغير اللغه 🌐", callback_data="lang"),
+                   ],
+                   [
+                       InlineKeyboardButton(
+                           "ضيـف البـوت لمجمـوعتـك ✅",
+                           url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
+                       ),
+                   ],
+               ]
+             )
+           )
+        except Exception as error:
+           await message.reply_photo(
+           photo="https://telegra.ph/file/1d46c3de641cf4ddf8415.jpg",
+           caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+🎤╖ أهلآ بك عزيزي أنا بوت شادو
+⚙️╢ وظيفتي حماية المجموعات
+✅╢ لتفعيل البوت عليك اتباع مايلي
+🔘╢ أضِف البوت إلى مجموعتك
+⚡️╢ ارفعهُ » مشرف
+⬆️╜ سيتم ترقيتك مالك في البوت
+ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ""",
+           reply_markup=InlineKeyboardMarkup(
+               [
+                   [
+                       InlineKeyboardButton("الاوامر 📚", callback_data="cbcmds"),
+                       InlineKeyboardButton("ℹ️ حول", callback_data="cbhowtouse"),
+                   ],
+                   [
+                       InlineKeyboardButton("تغير اللغه 🌐", callback_data="lang"),
+                   ],
+                   [
+                       InlineKeyboardButton(
+                           "ضيـف البـوت لمجمـوعتـك ✅",
+                           url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
+                       ),
+                   ],
+               ]
+             )
+           )
+@Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
+async def ping(client: Client, message: Message):
+    start = time()
+    m_reply = await message.reply_text("جاري قياس البينج...")
+    delta_ping = time() - start
+    await m_reply.edit_text("🏓 بينج\n" f"⚡️ `{delta_ping * 1000:.3f} ms`\nكلما كان الرقم اقل كان أفضل")
+
+
+@Client.on_message(command(["uptime", f"uptime@{BOT_USERNAME}"]) & ~filters.edited)
+async def get_uptime(client: Client, message: Message):
+    current_time = datetime.utcnow()
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
+    await message.reply_text(
+        "🤖 حاله البوت:\n"
+        f"• **وقت التشغيل:** `{uptime}`\n"
+        f"• **وقت البدء:** `{START_TIME_ISO}`"
     )
-
-
 
 
 @Client.on_chat_join_request()
@@ -173,4 +217,3 @@ async def chat_watcher_func(_, message: Message):
         await message.reply_text(
             f"👮🏼 (> {suspect} <)\n\n**Gbanned** user detected, that user has been gbanned by sudo user and was blocked from this Chat !\n\n🚫 **Reason:** potential spammer and abuser."
         )
-
