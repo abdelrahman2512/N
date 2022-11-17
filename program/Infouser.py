@@ -12,4 +12,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 
 @Client.on_message(command(["اسمي"]))
 async def muamen(client: Client, message: Message):
-    await message.reply_text("🦅 اسمك الاول » {`{message.from_user.first_name}`}\n🦅 اسمك الثاني » {`{message.from_user.last_name}`}")
+  usr = await client.get_users(message.from_user.id)
+  name = usr.first_name
+  namee = usr.last_name
+  await message.reply_text("🦅 اسمك الاول » {`{name}`}\n🦅 اسمك الثاني » {`{namee}`}")
