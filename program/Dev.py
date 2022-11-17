@@ -151,4 +151,3 @@ async def madison(client: Client, message: Message):
             ],
         ]
       )
-    )
