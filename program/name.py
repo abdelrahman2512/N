@@ -19,13 +19,4 @@ async def khalid(client: Client, message: Message):
     name = usr.first_name
     async for photo in client.iter_profile_photos(message.from_user.id, limit=1):
                     await message.reply_text( 
-                    f"""ٲسـمـك💕 ⇐ "{","`{message.from_user.first_name}`","}"""", 
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "╞. 𝐒𝐨𝐮𝐫𝐜𝐞 .╡", url=f"https://t.me/Source_Frozen"),
-                ],
-            ]
-        ),
-    )
+                    f"""ٲسـمـك💕 ⇐ `{message.from_user.first_name}`\nالثاني `{message.from_user.last_name}`"""
