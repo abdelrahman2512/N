@@ -19,4 +19,4 @@ async def muamen(client: Client, message: Message):
     name = usr.first_name
     async for photo in client.iter_profile_photos(message.from_user.id, limit=1):
                     await message.reply_text( 
-                    f"""🦅 اسمك الاول » { `{message.from_user.first_name}` }\n🦅 اسمك الثاني » { `{message.from_user.last_name}` }""")
+                    f"""🦅 اسمك الاول » ❲`{message.from_user.first_name}`❳\n🦅 اسمك الثاني » ❲`{message.from_user.last_name}`❳""")
