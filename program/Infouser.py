@@ -14,9 +14,9 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
     command(["اسمي"])
     & ~filters.edited
 )
-async def khalid(client: Client, message: Message):
+async def muamen(client: Client, message: Message):
     usr = await client.get_users(message.from_user.id)
     name = usr.first_name
     async for photo in client.iter_profile_photos(message.from_user.id, limit=1):
                     await message.reply_text( 
-                    f"""ٲسـمـك💕 ⇐ `{message.from_user.first_name}`\nالثاني `{message.from_user.last_name}`""")
+                    f"""🦅 اسمك الاول » { `{message.from_user.first_name}` }\n🦅 اسمك الثاني » { `{message.from_user.last_name}` }""")
