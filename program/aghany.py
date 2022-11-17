@@ -3,6 +3,7 @@ import asyncio
 from sys import version_info
 from program import __version__
 from driver.veez import user
+from config import BOT_USERNAME
 from driver.filters import command, other_filters
 from pyrogram import Client, filters, __version__ as pyrover
 from pyrogram.errors import FloodWait, MessageNotModified
@@ -12,8 +13,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 
 @Client.on_message(command(["اغاني"]) & ~filters.edited)
 async def start_(client: Client, message: Message):
-  BOT_USERNAME = client.username
-  await message.reply_text(
+    await message.reply_text(
         f"""🦅 اهلا بيك بقائمه تصنيفات الاغاني اختر ما تريد\n√
 """,
         reply_markup=InlineKeyboardMarkup(
