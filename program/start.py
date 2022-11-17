@@ -118,7 +118,7 @@ async def start_(client: Client, message: Message):
     else:
         try:
            await message.reply_photo(
-           photo=f"https://t.me/S550D",
+           photo=f"https://telegra.ph/file/1d46c3de641cf4ddf8415.jpg",
            caption=f"""ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ\n🎤╖ أهلآ بك عزيزي أنا بوت شادو\n⚙️╢ وظيفتي حماية المجموعات\n✅╢ لتفعيل البوت عليك اتباع مايلي\n🔘╢ أضِف البوت إلى مجموعتك\n⚡️╢ ارفعهُ » مشرف\n⬆️╜ سيتم ترقيتك مالك في البوت\nـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 """,
         reply_markup=InlineKeyboardMarkup(
