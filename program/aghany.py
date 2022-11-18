@@ -12,7 +12,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 
 
 @Client.on_message(command(["اغاني"]) & ~filters.edited)
-async def start_(client: Client, message: Message):
+async def aghany(client: Client, message: Message):
     await message.reply_text(
         f"""🦅 اهلا بيك بقائمه تصنيفات الاغاني اختر ما تريد\n√
 """,
