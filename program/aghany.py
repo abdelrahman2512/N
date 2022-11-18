@@ -32,21 +32,42 @@ async def aghany_(client: Client, message: Message):
     )
 
 
-@Client.on_callback_query(filters.regex("arb"))
-async def arb(_, query: CallbackQuery):
-    await query.answer("قائمة الاوامر")
+@Client.on_callback_query(filters.regex("aghany"))
+async def aghany(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""» **قم بالضغط علي الزر الذي تريده لمعرفه الاوامر لكل فئه منهم !**
-⚡ قناة البوت @FA9SH""",
+        f"""🦅 اهلا بيك بقائمه تصنيفات الاغاني اختر ما تريد\n√
+""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("👷🏻 اوامر الادمنيه", callback_data="cbadmin"),
-                    InlineKeyboardButton("🧙🏻 اوامر المطور", callback_data="cbsudo"),
-                ],[
-                    InlineKeyboardButton("📚 اوامر اساسيه", callback_data="cbbasic")
-                ],[
-                    InlineKeyboardButton("🔙 رجوع", callback_data="aghany")
+                    InlineKeyboardButton("اغاني عربي 🇪🇬", callback_data="arb")],
+                [InlineKeyboardButton("اغاني اجنبي 🇦🇺", callback_data="eng")],
+                [
+                    InlineKeyboardButton(
+                        "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/{BOT_USERNAME}?startgroup=new"
+                    )
+                ],
+            ]
+        ),
+    )
+
+
+@Client.on_callback_query(filters.regex("arb"))
+async def arb(_, query: CallbackQuery):
+    await query.edit_message_text(
+        f"""🦅 اهلا بك بقائمه الفنانين اختر احدي المغنيين\n√
+""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("تيست", callback_data="uy")],
+                [InlineKeyboardButton("تيست تاني", callback_data="kh")],
+                [
+                    InlineKeyboardButton("القائمه الرئيسيه ⏺️", callback_data="aghany")],
+                [
+                    InlineKeyboardButton(
+                        "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/{BOT_USERNAME}?startgroup=new"
+                    )
                 ],
             ]
         ),
