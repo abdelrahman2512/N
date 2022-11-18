@@ -29,3 +29,21 @@ async def aghany(client: Client, message: Message):
             ]
         ),
     )
+
+
+@Client.on_callback_query(filters.regex("arb"))
+async def cbguides(_, query: CallbackQuery):
+    await query.edit_message_text(
+        f"""🦅 اهلا بك بقائمه الفنانين اختر احدي المغنيين\n√
+""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("تيست", callback_data="arb")],
+                [InlineKeyboardButton("تيست تاني", callback_data="eng")],
+                [
+                    InlineKeyboardButton(
+                        "القائمه الرئيسيه ⏺️", callback_data="aghany")],
+            ]
+        ),
+    )
