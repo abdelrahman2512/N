@@ -142,7 +142,27 @@ async def start_(client: Client, message: Message):
                ]
              )
            )
-@Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
+
+@Client.on_message(
+    command(["/start", f"/start@{BOT_USERNAME}"]) & filters.group & ~filters.edited
+)
+async def start_(client: Client, message: Message):
+    await message.reply_text(
+        f"""مرحبا! أنا شادو. لاكتشاف وظائفي ، ابدأ محادثة معي.
+""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "🤖 ابدأ محادثه", url="https://t.me/{BOT_USERNAME}?start=start"
+                    )
+                ],
+            ]
+        ),
+    )
+
+
+@Client.on_message(command(["ping", f"ping@{BOT_USERNAME}", "بينج"]) & ~filters.edited)
 async def ping(client: Client, message: Message):
     start = time()
     m_reply = await message.reply_text("جاري قياس البينج...")
