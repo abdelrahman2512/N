@@ -12,7 +12,7 @@ from pytgcalls import (__version__ as pytover)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
 
 
-@Client.on_message(command(["اغاني"]) & ~filters.edited)
+@Client.on_message(filters.regex(["اغاني"]) & ~filters.edited)
 async def aghany_(client: Client, message: Message):
     await message.reply_text(
         f"""🦅 اهلا بيك بقائمه تصنيفات الاغاني اختر ما تريد\n√
