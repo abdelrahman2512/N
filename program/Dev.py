@@ -46,7 +46,7 @@ def get_file_id(msg: Message):
                 return obj
 
 
-@Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]))
+@Client.on_message(command(["مطور السورس", "مبرمج السورس", "مؤمن", "شادو"]) & ~filters.edited)
 async def shadow(client: Client, message: Message):
   usr = await client.get_users("1970797144")
   user = await client.get_chat("1970797144")
@@ -77,7 +77,7 @@ async def shadow(client: Client, message: Message):
     )
 
 
-@Client.on_message(command(["مطور البوت", "المطور", "مطور"]))
+@Client.on_message(command(["مطور البوت", "المطور", "مطور"]) & ~filters.edited)
 async def dev(client: Client, message: Message):
   dusr = await client.get_users(SUDO_USERS)
   duser = await client.get_chat(SUDO_USERS)
@@ -104,7 +104,7 @@ async def dev(client: Client, message: Message):
     )
 
 
-@Client.on_message(command(["المساعد", "الحساب المساعد"]))
+@Client.on_message(command(["المساعد", "الحساب المساعد"]) & ~filters.edited)
 async def muamen(client: Client, message: Message):
   ausr = await client.get_users(ASSISTANT_NAME)
   aname = ausr.first_name
@@ -129,7 +129,7 @@ async def muamen(client: Client, message: Message):
     )
 
 
-@Client.on_message(command(["السورس", "سورس"]))
+@Client.on_message(command(["السورس", "سورس"]) & ~filters.edited)
 async def source(client: Client, message: Message):
   sousr = await client.get_users("1970797144")
   sohad = sousr.first_name
