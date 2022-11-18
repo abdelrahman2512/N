@@ -20,12 +20,3 @@ async def muamen(client: Client, message: Message):
     async for photo in client.iter_profile_photos(message.from_user.id, limit=1):
                     await message.reply_text( 
                     f"""🦅 اسمك الاول » ❲`{message.from_user.first_name}`❳\n🦅 اسمك الثاني » ❲`{message.from_user.last_name}`❳""")
-
-
-@Client.on_message(
-    command(["رتبتي"])
-    & ~filters.edited
-)
-async def m(client: Client, message: Message):
-    if message.from_user.id == "1970797144":
-        await message.reply_text("مبرمج السورس")
