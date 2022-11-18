@@ -12,7 +12,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 
 
 @Client.on_message(command(["اغاني"]) & ~filters.edited)
-async def aghany(client: Client, message: Message):
+async def aghany_(client: Client, message: Message):
     await message.reply_text(
         f"""🦅 اهلا بيك بقائمه تصنيفات الاغاني اختر ما تريد\n√
 """,
@@ -32,18 +32,22 @@ async def aghany(client: Client, message: Message):
 
 
 @Client.on_callback_query(filters.regex("arb"))
-async def cbguides(_, query: CallbackQuery):
+async def bkk(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""🦅 اهلا بك بقائمه الفنانين اختر احدي المغنيين\n√
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("تيست", callback_data="arb")],
-                [InlineKeyboardButton("تيست تاني", callback_data="eng")],
+                    InlineKeyboardButton("تيست", callback_data="uy")],
+                [InlineKeyboardButton("تيست تاني", callback_data="kh")],
+                [
+                    InlineKeyboardButton("القائمه الرئيسيه ⏺️", callback_data="aghany")],
                 [
                     InlineKeyboardButton(
-                        "القائمه الرئيسيه ⏺️", callback_data="aghany")],
+                        "ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/{BOT_USERNAME}?startgroup=new"
+                    )
+                ],
             ]
         ),
     )
