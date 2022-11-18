@@ -146,7 +146,7 @@ async def start_(client: Client, message: Message):
 @Client.on_message(
     command(["/start", f"/start@{BOT_USERNAME}"]) & filters.group & ~filters.edited
 )
-async def start_(client: Client, message: Message):
+async def start(client: Client, message: Message):
     await message.reply_text(
         f"""مرحبا! أنا شادو. لاكتشاف وظائفي ، ابدأ محادثة معي.
 """,
