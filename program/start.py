@@ -154,7 +154,7 @@ async def start_(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🤖 ابدأ محادثه", url="https://t.me/{BOT_USERNAME}?start=start"
+                        "🤖 ابدأ محادثه", url=f"https://t.me/{BOT_USERNAME}?start=start"
                     )
                 ],
             ]
