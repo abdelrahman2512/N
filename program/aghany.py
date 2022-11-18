@@ -60,8 +60,9 @@ async def arb(_, query: CallbackQuery):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("تيست", callback_data="uy")],
-                [InlineKeyboardButton("تيست تاني", callback_data="kh")],
+                    InlineKeyboardButton("مهرجانات 🔊", callback_data="mhrgan"),
+                    InlineKeyboardButton("ادهم نابلسي 🔊", callback_data="adhm"),
+                ],
                 [
                     InlineKeyboardButton("القائمه الرئيسيه ⏺️", callback_data="aghany")],
                 [
