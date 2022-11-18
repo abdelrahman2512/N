@@ -33,7 +33,7 @@ async def aghany_(client: Client, message: Message):
 
 
 @Client.on_callback_query(filters.regex("arb"))
-async def bkk(_, query: CallbackQuery):
+async def arb(_, query: CallbackQuery):
     await query.edit_message_text(
         f"""🦅 اهلا بك بقائمه الفنانين اختر احدي المغنيين\n√
 """,
