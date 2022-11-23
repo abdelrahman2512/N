@@ -21,7 +21,7 @@ load_dotenv()
 
 SUDO_USERS = getenv("SUDO_USERS")
 
-ASSISTANT_NAME = getenv("ASSISTANT_NAME")
+BOT_TOKEN = getenv("BOT_TOKEN")
 
 def get_file_id(msg: Message):
     if msg.media:
@@ -106,11 +106,11 @@ async def dev(client: Client, message: Message):
 
 @Client.on_message(command(["المساعد", "الحساب المساعد"]) & ~filters.edited)
 async def muamen(client: Client, message: Message):
-  ausr = await client.get_users(ASSISTANT_NAME)
+  ausr = await client.get_users(BOT_TOKEN)
   aname = ausr.first_name
   anamee = ausr.mention
   auser = ausr.username
-  async for photo in client.iter_profile_photos(ASSISTANT_NAME, limit=1):
+  async for photo in client.iter_profile_photos(BOT_TOKEN, limit=1):
            await message.reply_photo(photo.file_id,       caption=f"""🦅 الحساب المساعد الخاص بالبوت:\n{anamee}\n√""",
     reply_markup=InlineKeyboardMarkup(
         [
